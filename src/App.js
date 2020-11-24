@@ -6,7 +6,7 @@ const App = () => {
   // the state properties here.
 
   // use state hook and destructuring to set up the slice of state
-  const [characters, setCharacters] = useState(charArr);
+  const [characters, setCharacters] = useState();
 
   // Fetch characters from the API in an effect hook. Remember, anytime you have a 
   // side effect in a component, you want to think about which state and/or props it should
