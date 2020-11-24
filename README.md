@@ -42,7 +42,9 @@ A: The parameters for a React component are passed in as a variable called `prop
 
 4. What are side effects, and how do you sync effects in a React component to changes of certain state or props?
 
-A: Fetching data from an API, using timers, logging data, or manually manipulaitng the DOM are examples of side effects which will affect something outside the scope of the React function being executed. Pure React components do not have side effects (the same props will result in the same output every time the component is rendered) whereas other components may require the effect hook to manage side effects, avoid bugs and inconsistencies in the app.
+A: Fetching data from an API, using timers, logging data, or manually manipulaitng the DOM are examples of side effects which will affect something outside the scope of the React function being executed. Pure React components do not have side effects (the same props will result in the same output every time the component is rendered) whereas other components may require the effect hook to manage side effects and avoid bugs and inconsistencies in the app.
+
+To sync effects in a react component to notice changes for a certain slice of state or change in props values, there will be a dependency array with each state or prop we want to sync with the effect hook. The effect hook will have the callback as its first argument and the dependency array as its second argument. If we only want the effect hook to execute the callback when a slice of state called `count` changes, we can use [count] as the second argument in the useEffect( () => { call api, console log, etc}, [count]) method. This effect hook will only run when the React component mounts the virtual DOM and whenever there is a change in the slice of state called `count`.
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 
