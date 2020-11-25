@@ -2,37 +2,55 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import './App.css';
 
-const App = () => {
-  // Try to think through what state you'll need for this app before starting. Then build out
-  // the state properties here.
+// props is an object containing all arguments in component in parent component jsx
+const RickAndMorty = () => {
+  
+  const [arr, setArr] = useState([1, 2, 3]);
 
-  // use state hook and destructuring to set up the slice of state
-  const [characters, setCharacters] = useState();
+  const rmArr = [];
 
-  // Fetch characters from the API in an effect hook. Remember, anytime you have a 
-  // side effect in a component, you want to think about which state and/or props it should
-  // sync up with, if any.
+  // effect hook
   useEffect(() => {
     // get request from axios library
     axios
       .get("https://rickandmortyapi.com/api/character/")
       .then(res => {
-        const rickMortyChars = res.data.results.map((item) => {
-        return {"item.name": item.name, "item.species": item.species};
-        });
-        setCharacters(rickMortyChars);
+        res.data.results.forEach((item) => {
+          rmArr.push({"name": item.name, "species": item.species});
+        })
+        setArr(rmArr);
       })
       .catch(err => console.log(err));
-    
-    characters.forEach((item) => console.log(item.name));
-    console.log("hello and goodbye from the effect hook!");
   }, []);
 
+  const style1 = {border:"solid slategray 2px", margin:"15px", fontWeight:"bold", fontSize:"30px"};
+  
+  return (
+    <div>
+      <div style={style1}>{arr[0].name} is {arr[0].species}</div>
+      <div style={style1}>{arr[1].name} is {arr[1].species}</div>
+      <div style={style1}>{arr[2].name} is {arr[2].species}</div>
+    </div>
+  );
+}
+
+const App = () => {
+
+  // use a boolean slice of state to allow call to child component
+  const [allowed, setAllowed] = useState(false);
+
+  const changeAllowed = () => {
+    setAllowed(true);
+  }
+
+  // return a component using jsx
+  // the aguments in RickAndMorty child component will be all the keys in props object
   return (
     <div className="App">
-      <h1 className="Header">Characters</h1>
-      <div>How do I show the characters in the state variable?</div>
+      <h1 className="Header">Characters Sprint Challenge</h1>
+      <button onClick={changeAllowed}>New Rick and Morty Character</button>
       
+      {allowed && <RickAndMorty />}
     </div>
   );
 }
