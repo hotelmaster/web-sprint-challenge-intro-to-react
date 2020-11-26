@@ -66,14 +66,22 @@ You are expected to be able to answer questions in these areas. Your responses c
 
 Your finished project must include all of the following requirements:
 
+// npm install axios (git bash), import axios from "axios" in (js file), html needs CDN link in script tag (html file body tag)
+// <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>, correct documentation link for get request on api webpage
 - [ ] Use ONE of the following APIs:
   - [Star Wars API](https://swapi.dev/)
   - [Alternate Star Wars API](https://swapi.py4e.com/)
   - [The Rick and Morty API](https://rickandmortyapi.com/)
   - [The RESTful Pokémon API](https://pokeapi.co/) (**harder**)
+    // placing axios get request inside useEffect with empty dependency array to execute when the state mounts the v.DOM
+    // use .then to get the res object, access items with res.data.results
 - [ ] Use the documentation and Google to learn how to fetch characters from your API.
+    // define an array to assign res.data.results to, and use the setter to assign this array to the slice of state requiring an array
+    // const arr = [] and const [stateArr, setStateArr] = useState() --> .then(res => {arr = res.data.results}) --> setStateArr(arr)
 - [ ] Obtain a list of characters. One or several requests might be needed, depending on the API.
 - [ ] Set the list of characters into state.
+    // invoke a cb that uses map method to produce a list item <li> for each item in character 'list' / array
+    // now in the jsx return invoke the cb - the return will be short since all the code for rendering the list items is in the cb
 - [ ] Render your characters to the screen:
   - Build a React component named 'Character' to render an individual character.
   - Map over the list in state, and for each character render a Character to the page.
